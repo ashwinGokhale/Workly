@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
-import { Route, Switch, Link } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import routes from '../../constants';
 import { ProtectedRoute, NotFound, Footer, FlashMessage, Navigation } from '../Common';
 import Home from '../Home';
@@ -15,9 +15,9 @@ import ResetPassword from '../ResetPassword';
 import { storageChanged, clearFlashMessages, fetchProfile } from '../../actions';
 import './index.css';
 
-import { Layout, Menu, Breadcrumb, Icon } from 'antd';
+import { Layout } from 'antd';
 
-const { Header, Content } = Layout;
+const { Content } = Layout;
 
 class App extends Component {
 	static propTypes = {

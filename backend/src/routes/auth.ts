@@ -14,7 +14,7 @@ router.post('/signup', multer.any(), async (req, res) => {
 			? (req.files as Express.Multer.File[])
 			: [];
 
-		const { name, email, password, passwordConfirm, phone } = req.body;
+		const { name, email, password, passwordConfirm } = req.body;
 		if (!name)
 			return errorRes(
 				res,
@@ -23,9 +23,6 @@ router.post('/signup', multer.any(), async (req, res) => {
 			);
 		if (!email) return errorRes(res, 400, 'Please provide your email');
 		if (!isEmail(email)) return errorRes(res, 400, 'Invalid email');
-		if (!phone) return errorRes(res, 400, 'Please provide a phone number');
-		// if (!isMobilePhone(phone, 'en-US'))
-		// 	return errorRes(res, 400, 'Please provide a valid US phone number');
 		if (!password || password.length < 5)
 			return errorRes(
 				res,
@@ -48,8 +45,7 @@ router.post('/signup', multer.any(), async (req, res) => {
 		user = new User({
 			name,
 			email,
-			password,
-			phone
+			password
 		});
 
 		await user.save();

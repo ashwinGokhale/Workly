@@ -7,7 +7,6 @@ export interface IUserModel extends mongoose.Document {
 	name: string;
 	email: string;
 	password: string;
-	phone: string;
 	// TODO: Add roles (job seeker or recruiter)
 	comparePassword(password: string): boolean;
 }
@@ -26,10 +25,6 @@ const schema = new Schema(
 			type: String,
 			select: false,
 			default: ''
-		},
-		phone: {
-			type: String,
-			required: true
 		}
 	},
 	{ timestamps: true }
