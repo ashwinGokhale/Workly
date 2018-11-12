@@ -8,7 +8,7 @@ class FlashMessage extends Component {
 	static propTypes = {
 		msgGreen: PropTypes.string,
 		msgRed: PropTypes.string,
-		clear: PropTypes.func.isRequired
+		flash: PropTypes.func.isRequired
 	};
 
 	static defaultProps = {
