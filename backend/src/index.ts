@@ -10,4 +10,10 @@ const start = async () => {
 	return server;
 };
 
-start();
+start().then(server =>
+	// Graceful shutdown
+	process.on('SIGTERM', async () => {
+		await server.mongoose.disconnect();
+		process.exit(0);
+	})
+);

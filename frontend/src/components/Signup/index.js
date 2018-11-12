@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { err } from '../../constants';
+import routes, { err } from '../../constants';
 import { sendFlashMessage, clearFlashMessages, signUp } from '../../actions';
 import { Header } from '../Common';
+import FormItem from 'antd/lib/form/FormItem';
+import { Button, Form, Col, Row, Checkbox, Input, Icon } from 'antd';
 
 class SignUpPage extends Component {
 	static propTypes = {
@@ -34,7 +37,7 @@ class SignUpPage extends Component {
 
 	onSubmit = async e => {
 		e.preventDefault();
-		const { name, email, password, passwordConfirm, phone } = this.state;
+		const { name, email, password, passwordConfirm } = this.state;
 		const { flash, clear, signUp, history } = this.props;
 		try {
 			clear();
@@ -56,78 +59,80 @@ class SignUpPage extends Component {
 	};
 
 	render() {
-		const { name, email, password, passwordConfirm, phone } = this.state;
+		const formItemLayout = {
+			labelCol: { span: 4 },
+			wrapperCol: { span: 14 },
+			colon: true
+		};
 		return (
-			<div className="section">
-				<div className="section-container">
-					<Header message="Signup" />
-					<form onSubmit={this.onSubmit}>
-						<label htmlFor="name">
-							Name:&nbsp;
-							<input
-								id="name"
-								placeholder="Full Name"
-								value={name}
-								onChange={this.onChange}
-								pattern="([a-zA-Z]+ )+[a-zA-Z]+"
-								title="Please enter your first and last name"
-								required
-							/>
-						</label>
-						<br />
-						<label htmlFor="email">
-							Email:&nbsp;
-							<input
-								type="email"
-								id="email"
-								placeholder="me@example.com"
-								value={email}
-								onChange={this.onChange}
-								title="Please enter your email"
-								required
-							/>
-						</label>
-						<br />
-						<label htmlFor="phone">
-							Phone Number:&nbsp;
-							<input
-								type="phone"
-								id="phone"
-								placeholder="123-456-7890"
-								value={phone}
-								onChange={this.onChange}
-								title="Please enter your phone number"
-								required
-							/>
-						</label>
-						<br />
-						<label htmlFor="password">
-							Password:&nbsp;
-							<input
-								type="password"
-								id="password"
-								value={password}
-								onChange={this.onChange}
-								title="Please enter a password"
-								required
-							/>
-						</label>
-						<br />
-						<label htmlFor="passwordConfirm">
-							Confirm Password:&nbsp;
-							<input
-								type="password"
-								id="passwordConfirm"
-								value={passwordConfirm}
-								onChange={this.onChange}
-								title="Please confirm your password"
-								required
-							/>
-						</label>
-						<br />
-						<input type="submit" value="Join" />
-					</form>
-				</div>
+			<div>
+				<Header message="Signup" />
+				<u>
+					<h2>Signup</h2>
+				</u>
+				<Form
+					layout="horizontal"
+					className="login-form"
+					onSubmit={this.onSubmit}
+					style={{ maxWidth: 800 }}
+				>
+					<FormItem {...formItemLayout} label="Email">
+						<Input
+							prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+							id="email"
+							onChange={this.onChange}
+							placeholder="Email"
+							type="email"
+							title="Please enter your email"
+							required
+						/>
+					</FormItem>
+					<FormItem {...formItemLayout} label="Name">
+						<Input
+							prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+							id="name"
+							onChange={this.onChange}
+							placeholder="Full Name"
+							pattern="([a-zA-Z]+ )+[a-zA-Z]+"
+							title="Please enter your first and last name"
+							required
+						/>
+					</FormItem>
+					<FormItem {...formItemLayout} label="Password">
+						<Input
+							prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+							id="password"
+							onChange={this.onChange}
+							type="password"
+							placeholder="Password"
+							title="Please enter a password"
+							required
+						/>
+					</FormItem>
+					<FormItem {...formItemLayout} label="Password Confirm">
+						<Input
+							prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+							id="passwordConfirm"
+							onChange={this.onChange}
+							type="password"
+							placeholder="Password Confirm"
+							required
+							title="Please confirm your password"
+						/>
+					</FormItem>
+					<FormItem
+						wrapperCol={{
+							// xs: { span: 24, offset: 0 },
+							// sm: { span: 12, offset: 12 }
+							span: 14,
+							offset: 4
+						}}
+					>
+						<Button type="primary" htmlType="submit">
+							Join
+						</Button>
+					</FormItem>
+				</Form>
 			</div>
 		);
 	}
