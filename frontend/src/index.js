@@ -6,6 +6,7 @@ import store, { history } from './store';
 import App from './components/App';
 import * as serviceWorker from './serviceWorker';
 import 'sanitize.css/sanitize.css';
+import 'antd/dist/antd.css';
 import './index.css';
 
 if (process.env.NODE_ENV !== 'development') {
