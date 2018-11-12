@@ -4,8 +4,7 @@ import PropTypes from 'prop-types';
 import { err } from '../../constants';
 import {
 	sendFlashMessage,
-	clearFlashMessages,
-	createPost
+	clearFlashMessages
 } from '../../actions';
 import { Header } from '../Common';
 

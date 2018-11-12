@@ -13,6 +13,7 @@ import SignUp from '../Signup';
 import ForgotPassword from '../ForgotPassword';
 import ResetPassword from '../ResetPassword';
 import { storageChanged, clearFlashMessages, fetchProfile } from '../../actions';
+import './index.css';
 
 import { Layout, Menu, Breadcrumb, Icon } from 'antd';
 
@@ -56,16 +57,17 @@ class App extends Component {
 		const {
 			token,
 			user,
-			match: { path }
+			location: { pathname: path }
 		} = this.props;
+		console.log('App path:', path);
 		return (
 			<Layout>
 				<Navigation auth={!!token} user={user} path={path} />
 
 				<FlashMessage />
 
-				<Layout style={{ padding: '24px 24px 0px 24px' }}>
-					<Layout style={{ backgroundColor: 'white', padding: 24 }}>
+				<Layout className="App" style={{ padding: '24px 24px 0px 24px' }}>
+					<Layout style={{ padding: 24 }}>
 						<Content>
 							<Switch>
 								<Route exact path={routes.HOME} component={Home} />
