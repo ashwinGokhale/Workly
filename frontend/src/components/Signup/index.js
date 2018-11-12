@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import routes, { err } from '../../constants';
+import { err } from '../../constants';
 import { sendFlashMessage, clearFlashMessages, signUp } from '../../actions';
 import { Header } from '../Common';
 import FormItem from 'antd/lib/form/FormItem';
-import { Button, Form, Col, Row, Checkbox, Input, Icon } from 'antd';
+import { Button, Form, Input, Icon } from 'antd';
 
 class SignUpPage extends Component {
 	static propTypes = {
@@ -122,8 +121,6 @@ class SignUpPage extends Component {
 					</FormItem>
 					<FormItem
 						wrapperCol={{
-							// xs: { span: 24, offset: 0 },
-							// sm: { span: 12, offset: 12 }
 							span: 14,
 							offset: 4
 						}}

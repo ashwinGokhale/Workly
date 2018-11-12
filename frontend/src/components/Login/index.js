@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { Form, Icon, Input, Button, Checkbox, Row, Col, Layout } from 'antd';
+import { Form, Icon, Input, Button, Checkbox, Row, Col } from 'antd';
 import { signIn, sendFlashMessage } from '../../actions';
 import routes, { err } from '../../constants';
 import { Header } from '../Common';
+import FormItem from 'antd/lib/form/FormItem';
 
 class LoginPage extends Component {
 	static propTypes = {
@@ -52,7 +53,6 @@ class LoginPage extends Component {
 	};
 
 	render() {
-		const { email, password } = this.state;
 		const formItemLayout = {
 			labelCol: { span: 4 },
 			wrapperCol: { span: 14 },
@@ -124,48 +124,3 @@ export default connect(
 	mapStateToProps,
 	{ signIn, flash: sendFlashMessage }
 )(LoginPage);
-
-const FormItem = Form.Item;
-
-class NormalLoginForm extends React.Component {
-	handleSubmit = e => {
-		e.preventDefault();
-		this.props.form.validateFields((err, values) => {
-			if (!err) {
-				console.log('Received values of form: ', values);
-			}
-		});
-	};
-
-	render() {
-		return (
-			<Form onSubmit={this.handleSubmit} className="login-form">
-				<FormItem>
-					<Input
-						prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-						placeholder="Username"
-					/>
-				</FormItem>
-				<FormItem>
-					<Input
-						prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
-						type="password"
-						placeholder="Password"
-					/>
-				</FormItem>
-				<FormItem>
-					(<Checkbox>Remember me</Checkbox>)}
-					<a className="login-form-forgot" href="">
-						Forgot password
-					</a>
-					<Button type="primary" htmlType="submit" className="login-form-button">
-						Log in
-					</Button>
-					Or <a href="">register now!</a>
-				</FormItem>
-			</Form>
-		);
-	}
-}
-
-const WrappedNormalLoginForm = Form.create()(NormalLoginForm);
