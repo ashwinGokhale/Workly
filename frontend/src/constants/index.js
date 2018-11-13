@@ -16,10 +16,10 @@ export const err = e =>
 	!e
 		? 'Whoops, something went wrong!'
 		: e.message && typeof e.message === 'string'
-			? e.message
-			: e.error && typeof e.error === 'string'
-				? e.error
-				: 'Whoops, something went wrong!';
+		? e.message
+		: e.error && typeof e.error === 'string'
+		? e.error
+		: 'Whoops, something went wrong!';
 
 export const hasPermission = (user, name) =>
 	user &&
@@ -49,5 +49,7 @@ export default {
 	FORGOT_PASSWORD: '/forgot',
 	PROFILE: '/profile',
 	USER: '/user/:id',
-	POST: '/post'
+	POST: '/post',
+	CREATE_JOB: '/jobs/create',
+	JOB: '/jobs/:id'
 };

@@ -28,7 +28,7 @@ const menu = (
 
 const Navbar = ({ auth, user, path }) => {
 	const routesToMatch = auth
-		? [routes.HOME, routes.PROFILE]
+		? [routes.HOME, routes.PROFILE, routes.CREATE_JOB]
 		: [routes.HOME, routes.LOGIN, routes.SIGNUP];
 	const selectedKey = routesToMatch.some(route => route === path) ? path : routes.HOME;
 	return (
@@ -53,6 +53,9 @@ const Navbar = ({ auth, user, path }) => {
 				>
 					<Menu.Item key={routes.HOME}>
 						<Link to={routes.HOME}>Home</Link>
+					</Menu.Item>
+					<Menu.Item>
+						<Link to={routes.CREATE_JOB}>Create Job</Link>
 					</Menu.Item>
 					<Menu.Item style={{ float: 'right' }}>
 						<Dropdown overlay={menu}>

@@ -11,6 +11,7 @@ import passportMiddleWare, { extractUser } from './middleware/passport';
 import { router as home } from './routes/home';
 import { router as auth } from './routes/auth';
 import { router as users } from './routes/users';
+import { router as jobs } from './routes/jobs';
 const { NODE_ENV, DB } = CONFIG;
 
 export default class Server {
@@ -51,6 +52,7 @@ export default class Server {
 		this.app.use('/api', home);
 		this.app.use('/api/auth', auth);
 		this.app.use('/api/users', users);
+		this.app.use('/api/jobs', jobs);
 	}
 
 	private async mongoSetup() {

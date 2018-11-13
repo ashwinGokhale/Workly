@@ -9,6 +9,7 @@ const makeDispatcher = (type, ...argNames) => (...args) => {
 	argNames.forEach((arg, index) => {
 		action[argNames[index]] = args[index];
 	});
+
 	return action;
 };
 
@@ -20,6 +21,10 @@ export const AUTH_REMEMBER_ME_SET = 'AUTH_REMEMBER_ME_SET';
 export const FLASH_GREEN_SET = 'FLASH_GREEN_SET';
 export const FLASH_RED_SET = 'FLASH_RED_SET';
 
+export const ADD_JOB = 'ADD_JOB';
+export const REMOVE_JOB = 'REMOVE_JOB';
+export const SET_JOBS = 'SET_JOBS';
+
 // Dispatchers
 const setUser = makeDispatcher(AUTH_USER_SET, 'user');
 const setToken = makeDispatcher(AUTH_TOKEN_SET, 'token');
@@ -27,6 +32,10 @@ const setRememberMe = makeDispatcher(AUTH_REMEMBER_ME_SET, 'rememberMe');
 
 const setGreenFlash = makeDispatcher(FLASH_GREEN_SET, 'msgGreen');
 const setRedFlash = makeDispatcher(FLASH_RED_SET, 'msgRed');
+
+const addJob = makeDispatcher(ADD_JOB, 'job');
+const removeJob = makeDispatcher(REMOVE_JOB, 'job');
+const setJobs = makeDispatcher(SET_JOBS, 'jobs');
 
 // Creators
 export const signUp = newUser => async dispatch => {
@@ -65,6 +74,7 @@ export const signOut = () => async dispatch => {
 		dispatch(setToken(null));
 		dispatch(setUser(null));
 		dispatch(setRememberMe(false));
+		dispatch(setJobs([]));
 	} catch (error) {
 		throw error;
 	}
@@ -90,6 +100,40 @@ export const resetPassword = async (password, passwordConfirm, token) => {
 			passwordConfirm,
 			token
 		});
+		return response;
+	} catch (error) {
+		throw error.response.data;
+	}
+};
+
+// Job Stuff
+
+export const fetchJobs = params => async dispatch => {
+	try {
+		const token = getToken();
+		const {
+			data: { response }
+		} = await axios.get('/api/jobs', {
+			params,
+			headers: { Authorization: `Bearer ${token}` }
+		});
+		dispatch(setJobs(response));
+		return response;
+	} catch (error) {
+		throw error.response.data;
+	}
+};
+
+export const createJob = job => async dispatch => {
+	try {
+		const token = getToken();
+		const {
+			data: { response }
+		} = await axios.post('/api/jobs', job, {
+			headers: { Authorization: `Bearer ${token}` }
+		});
+
+		dispatch(addJob(response));
 		return response;
 	} catch (error) {
 		throw error.response.data;

@@ -54,7 +54,7 @@ class LoginPage extends Component {
 
 	render() {
 		const formItemLayout = {
-			labelCol: { span: 4 },
+			labelCol: { span: 8 },
 			wrapperCol: { span: 14 },
 			colon: true
 		};
@@ -68,7 +68,7 @@ class LoginPage extends Component {
 					layout="horizontal"
 					className="login-form"
 					onSubmit={this.onSubmit}
-					style={{ maxWidth: 800 }}
+					// style={{ maxWidth: 800 }}
 				>
 					<FormItem {...formItemLayout} label="Email">
 						<Input
@@ -100,8 +100,6 @@ class LoginPage extends Component {
 					</FormItem>
 					<FormItem
 						wrapperCol={{
-							// xs: { span: 24, offset: 0 },
-							// sm: { span: 12, offset: 12 }
 							span: 14,
 							offset: 4
 						}}

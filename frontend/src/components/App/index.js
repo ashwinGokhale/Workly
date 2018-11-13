@@ -12,6 +12,7 @@ import Logout from '../Logout';
 import SignUp from '../Signup';
 import ForgotPassword from '../ForgotPassword';
 import ResetPassword from '../ResetPassword';
+import CreateJob from '../CreateJob';
 import { storageChanged, clearFlashMessages, fetchProfile } from '../../actions';
 import './index.css';
 
@@ -66,8 +67,8 @@ class App extends Component {
 
 				<FlashMessage />
 
-				<Layout className="App" style={{ padding: '24px 24px 0px 24px' }}>
-					<Layout style={{ padding: 24 }}>
+				<Layout className="App">
+					<Layout className="App-content" style={{ background: 'white' }}>
 						<Content>
 							<Switch>
 								<Route exact path={routes.HOME} component={Home} />
@@ -76,6 +77,12 @@ class App extends Component {
 									exact
 									path={routes.LOGOUT}
 									component={Logout}
+									token={token}
+								/>
+								<ProtectedRoute
+									exact
+									path={routes.CREATE_JOB}
+									component={CreateJob}
 									token={token}
 								/>
 								<Route exact path={routes.SIGNUP} component={SignUp} />
@@ -95,7 +102,7 @@ class App extends Component {
 						</Content>
 					</Layout>
 
-					<Layout style={{ padding: 24, textAlign: 'center' }}>
+					<Layout className="App-footer">
 						<Footer />
 					</Layout>
 				</Layout>
