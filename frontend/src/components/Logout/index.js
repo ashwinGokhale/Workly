@@ -13,9 +13,12 @@ class Logout extends Component {
 
 	componentWillMount = () => this.props.signOut();
 
-	componentDidMount = () => this.props.sendFlashMessage('You are now signed out', 'green');
-
 	render = () => <Redirect to={routes.HOME} />;
+
+	componentDidMount = () => this.props.sendFlashMessage('You are now signed out', 'green');
 }
 
-export default connect(null, { signOut, sendFlashMessage })(Logout);
+export default connect(
+	null,
+	{ signOut, sendFlashMessage }
+)(Logout);

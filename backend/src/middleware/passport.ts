@@ -5,20 +5,20 @@ import CONFIG from '../config';
 import { User, IUserModel } from '../models/user';
 import { errorRes } from '../utils';
 
-passport.serializeUser<any, any>((user, done) => {
-	console.log('Passport serialize user:', user);
-	done(undefined, user.id);
-});
+// passport.serializeUser<any, any>((user, done) => {
+// 	console.log('Passport serialize user:', user);
+// 	done(undefined, user.id);
+// });
 
-passport.deserializeUser(async (id, done) => {
-	try {
-		const user = await User.findById(id).exec();
-		console.log('Passport serialize user:', user);
-		done(null, user as IUserModel);
-	} catch (error) {
-		done(error, undefined);
-	}
-});
+// passport.deserializeUser(async (id, done) => {
+// 	try {
+// 		const user = await User.findById(id).exec();
+// 		console.log('Passport serialize user:', user);
+// 		done(null, user as IUserModel);
+// 	} catch (error) {
+// 		done(error, undefined);
+// 	}
+// });
 
 export default (pass: passport.PassportStatic) =>
 	pass.use(
