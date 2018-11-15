@@ -7,24 +7,6 @@ const data = [
 		name: 'John Brown',
 		age: 32,
 		address: 'New York No. 1 Lake Park'
-	},
-	{
-		key: '2',
-		name: 'Joe Black',
-		age: 42,
-		address: 'London No. 1 Lake Park'
-	},
-	{
-		key: '3',
-		name: 'Jim Green',
-		age: 32,
-		address: 'Sidney No. 1 Lake Park'
-	},
-	{
-		key: '4',
-		name: 'Jim Red',
-		age: 32,
-		address: 'London No. 2 Lake Park'
 	}
 ];
 
@@ -65,7 +47,7 @@ class JobTable extends React.Component {
 					</div>
 				),
 				filterIcon: filtered => (
-					<Icon type="smile-o" style={{ color: filtered ? '#108ee9' : '#aaa' }} />
+					<Icon type="filter" style={{ color: filtered ? '#108ee9' : '#aaa' }} />
 				),
 				onFilter: (value, record) =>
 					record.name.toLowerCase().includes(value.toLowerCase()),
@@ -103,6 +85,7 @@ class JobTable extends React.Component {
 				dataIndex: 'age',
 				key: 'age'
 			},
+			{},
 			{
 				title: 'Address',
 				dataIndex: 'address',

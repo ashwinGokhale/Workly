@@ -6,6 +6,7 @@ import { Route, Switch } from 'react-router-dom';
 import routes from '../../constants';
 import { ProtectedRoute, NotFound, Footer, FlashMessage, Navigation } from '../Common';
 import Home from '../Home';
+import Splash from '../Splash';
 import User from '../User';
 import Login from '../Login';
 import Logout from '../Logout';
@@ -71,7 +72,12 @@ class App extends Component {
 					<Layout className="App-content" style={{ background: 'white' }}>
 						<Content>
 							<Switch>
-								<Route exact path={routes.HOME} component={Home} />
+								{token ? (
+									<Route exact path={routes.HOME} component={Home} />
+								) : (
+									<Route exact path={routes.HOME} component={Splash} />
+								)}
+
 								<Route exact path={routes.LOGIN} component={Login} />
 								<ProtectedRoute
 									exact

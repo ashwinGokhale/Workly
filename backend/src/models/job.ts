@@ -1,12 +1,28 @@
-import * as mongoose from 'mongoose';
+import { Schema, Document, model } from 'mongoose';
 import { IUserModel } from './user';
 
-export let Schema = mongoose.Schema;
+export const statuses = [
+	'Need To Apply',
+	'Applied',
+	'Interview',
+	'Received Offer',
+	'Accepted Offer',
+	'Denied'
+]
 
-export interface IJobModel extends mongoose.Document {
+export interface IJobModel extends Document {
 	user: IUserModel;
-	name: string;
+	company: string;
 	// TODO: add more fields
+	role: string;
+	email: string;
+	status: string;
+	coverLetter: boolean;
+	location: string;
+	recruiter: string;
+	blockers: string[];
+	nextSteps: string[];
+	offerDetails: string;
 }
 
 const schema = new Schema(
@@ -16,12 +32,49 @@ const schema = new Schema(
 			ref: 'User',
 			required: true
 		},
-		name: {
+		company: {
 			type: String,
 			required: true
+		},
+		role: {
+			type: String,
+			required: true
+		},
+		email: {
+			type: String,
+			required: true
+		},
+		status: {
+			type: String,
+			enum: statuses,
+			default: statuses[0]
+		},
+		coverLetter: {
+			type: Boolean,
+			default: false
+		},
+		location: {
+			type: String,
+			default: ''
+		},
+		recruiter: {
+			type: String,
+			default: ''
+		},
+		blockers: {
+			type: [String],
+			default: []
+		},
+		nextSteps: {
+			type: [String],
+			default: []
+		},
+		offerDetails: {
+			type: String,
+			default: ''
 		}
 	},
 	{ timestamps: true }
 );
 
-export const Job = mongoose.model<IJobModel>('Job', schema, 'jobs');
+export const Job = model<IJobModel>('Job', schema, 'jobs');
