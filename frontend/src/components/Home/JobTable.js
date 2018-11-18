@@ -26,6 +26,7 @@ class JobTable extends React.Component {
 	};
 
 	render() {
+		console.log('Job Table props:', this.props);
 		const columns = [
 			{
 				title: 'Name',
@@ -85,7 +86,6 @@ class JobTable extends React.Component {
 				dataIndex: 'age',
 				key: 'age'
 			},
-			{},
 			{
 				title: 'Address',
 				dataIndex: 'address',

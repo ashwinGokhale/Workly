@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import { Route } from 'react-router-dom';
 import { CustomRedirect } from '.';
 
-const ProtectedRoute = ({ component: Component, token, msg, type, ...rest }) => (
+const ProtectedRoute = ({ component: Component, token, msg, ...rest }) => (
 	<Route
 		{...rest}
 		render={props =>
-			token ? <Component {...props} type={type} /> : <CustomRedirect to="/" msgRed={msg} />
+			token ? <Component {...props} /> : <CustomRedirect to="/" msgRed={msg} />
 		}
 	/>
 );
@@ -15,14 +15,12 @@ const ProtectedRoute = ({ component: Component, token, msg, type, ...rest }) => 
 ProtectedRoute.propTypes = {
 	component: PropTypes.any.isRequired,
 	token: PropTypes.string,
-	msg: PropTypes.string,
-	type: PropTypes.string
+	msg: PropTypes.string
 };
 
 ProtectedRoute.defaultProps = {
 	token: null,
-	msg: 'Permission Denied',
-	type: ''
+	msg: 'Permission Denied'
 };
 
 export default ProtectedRoute;

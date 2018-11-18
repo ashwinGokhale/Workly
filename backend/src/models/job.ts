@@ -8,7 +8,7 @@ export const statuses = [
 	'Received Offer',
 	'Accepted Offer',
 	'Denied'
-]
+];
 
 export interface IJobModel extends Document {
 	user: IUserModel;
@@ -23,6 +23,7 @@ export interface IJobModel extends Document {
 	blockers: string[];
 	nextSteps: string[];
 	offerDetails: string;
+	additionalInformation: string;
 }
 
 const schema = new Schema(
@@ -70,6 +71,10 @@ const schema = new Schema(
 			default: []
 		},
 		offerDetails: {
+			type: String,
+			default: ''
+		},
+		additionalInformation: {
 			type: String,
 			default: ''
 		}

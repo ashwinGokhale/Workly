@@ -9,8 +9,7 @@ router.get('/', auth(), async (req, res) => {
 	try {
 		const jobs = await Job.find({
 			user: req.user
-		})
-		.exec();
+		}).exec();
 		return successRes(res, jobs);
 	} catch (error) {
 		console.error(error);
@@ -20,11 +19,31 @@ router.get('/', auth(), async (req, res) => {
 
 router.post('/', auth(), async (req, res) => {
 	try {
-		const { name } = req.body;
-		if (!name) return errorRes(res, 400, 'Please enter company name');
+		const {
+			company,
+			role,
+			email,
+			status,
+			coverLetter,
+			location,
+			recruiter,
+			blockers,
+			nextSteps
+		} = req.body;
+		if (!company) return errorRes(res, 400, 'Please enter company name');
+		if (!role) return errorRes(res, 400, 'Please enter the role you are applying for');
+		if (!email) return errorRes(res, 400, 'Please enter the email you applied with');
 		const job = new Job({
 			user: req.user,
-			name
+			company,
+			role,
+			email,
+			status,
+			coverLetter,
+			location,
+			recruiter,
+			blockers,
+			nextSteps
 		});
 		await job.save();
 		return successRes(res, job);

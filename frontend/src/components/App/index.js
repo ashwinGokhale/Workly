@@ -48,8 +48,8 @@ class App extends Component {
 
 	componentWillMount = async () => {
 		try {
-			const response = await this.props.fetchProfile();
-			console.log('Sign in response:', response);
+			// const response = await this.props.fetchProfile();
+			// console.log('Sign in response:', response);
 		} catch (error) {
 			console.error('Sign in error:', error);
 		}

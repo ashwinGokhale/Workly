@@ -11,30 +11,30 @@ class HomePage extends Component {
 		flash: PropTypes.func.isRequired,
 		clear: PropTypes.func.isRequired,
 		getJobs: PropTypes.func.isRequired,
-		user: PropTypes.object
+		token: PropTypes.string
 	};
 
 	static defaultProps = {
-		user: null
+		token: ''
 	};
 
 	constructor(props) {
 		super(props);
 		this.state = {
+			jobs: [],
 			loading: true
 		};
 	}
 
 	componentDidMount = async () => {
-		const { clear, flash, getJobs, user } = this.props;
+		const { clear, flash, getJobs } = this.props;
 		try {
 			clear();
-			if (!user) return;
 			const jobs = await getJobs();
-			console.log('Got jobs:', jobs);
-			this.setState({ loading: false });
+			this.setState({ loading: false, jobs });
 		} catch (error) {
 			clear();
+			this.setState({ loading: false });
 			return flash(err(error));
 		}
 	};
@@ -43,7 +43,7 @@ class HomePage extends Component {
 		return (
 			<div>
 				<h1>Workly</h1>
-				<JobTable />
+				<JobTable {...this.state} />
 			</div>
 		);
 	}
