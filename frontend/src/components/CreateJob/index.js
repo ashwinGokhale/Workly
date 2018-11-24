@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { sendFlashMessage, clearFlashMessages, createJob } from '../../actions';
-import { Header } from '../Common';
+import ReactQuill from 'react-quill';
 import { Form, Input, Button, Checkbox, Select } from 'antd';
 import FormItem from 'antd/lib/form/FormItem';
+import { sendFlashMessage, clearFlashMessages, createJob } from '../../actions';
+import { Header } from '../Common';
 import routes, { err } from '../../constants';
+import 'react-quill/dist/quill.snow.css';
 
 const statuses = [
 	'Need To Apply',
@@ -38,11 +40,14 @@ class CreateJob extends Component {
 			coverLetter: false,
 			location: '',
 			recruiter: '',
-			blockers: [],
-			nextSteps: [],
+			blockers: '',
+			nextSteps: '',
 			additionalInformation: ''
 		};
+		console.log('Form props:', this.props);
 	}
+
+	onTextChange = id => value => this.setState({ [id]: value });
 
 	onChange = e => this.setState({ [e.target.name]: e.target.value });
 
@@ -72,10 +77,21 @@ class CreateJob extends Component {
 		}
 	};
 
-	render() {
+	render(s, p, c) {
+		// const formItemLayout = {
+		// 	labelCol: { span: 8 },
+		// 	wrapperCol: { span: 14 },
+		// 	colon: true
+		// };
 		const formItemLayout = {
-			labelCol: { span: 8 },
-			wrapperCol: { span: 14 },
+			labelCol: {
+				xs: { span: 24 },
+				sm: { span: 4 }
+			},
+			wrapperCol: {
+				xs: { span: 24 },
+				sm: { span: 20 }
+			},
 			colon: true
 		};
 
@@ -88,7 +104,6 @@ class CreateJob extends Component {
 				<Form layout="horizontal" onSubmit={this.onSubmit}>
 					<FormItem {...formItemLayout} label="Company *">
 						<Input
-							// prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
 							name="company"
 							onChange={this.onChange}
 							placeholder="Google"
@@ -127,7 +142,11 @@ class CreateJob extends Component {
 						</Select>
 					</FormItem>
 					<FormItem {...formItemLayout} label="Cover Letter">
-						<Checkbox name="coverLetter" onChange={this.onChange} />
+						<Checkbox
+							style={{ float: 'left' }}
+							name="coverLetter"
+							onChange={e => this.setState({ coverLetter: !this.state.coverLetter })}
+						/>
 					</FormItem>
 					<FormItem {...formItemLayout} label="Location">
 						<Input
@@ -143,33 +162,34 @@ class CreateJob extends Component {
 							placeholder="Recruiter Info"
 						/>
 					</FormItem>
-					{/* <Form layout="horizontal">
-						<FormItem {...formItemLayout} label="Blockers">
-							<Input
-								name="blockers"
-								onChange={this.onChange}
-								placeholder="Waiting for referral"
-							/>
-						</FormItem>
-						<FormItem {...formItemLayout} label="Next Steps">
-							<Input
-								name="nextSteps"
-								onChange={this.onChange}
-								placeholder="Wait for cofing challenge"
-							/>
-						</FormItem>
-					</Form> */}
-					<FormItem {...formItemLayout} label="Additional Information">
-						<Input
-							name="additionalInformation"
-							onChange={this.onChange}
-							placeholder=""
-						/>
-					</FormItem>
+					<u>
+						<h3>Blockers:</h3>
+					</u>
+					<ReactQuill
+						value={this.state.blockers}
+						onChange={this.onTextChange('blockers')}
+					/>
+					<br />
+					<u>
+						<h3>Next Steps:</h3>
+					</u>
+					<ReactQuill
+						value={this.state.nextSteps}
+						onChange={this.onTextChange('nextSteps')}
+					/>
+					<br />
+					<u>
+						<h3>Additional Information:</h3>
+					</u>
+					<ReactQuill
+						value={this.state.additionalInformation}
+						onChange={this.onTextChange('additionalInformation')}
+					/>
+					<br />
 					<FormItem
 						wrapperCol={{
 							span: 14,
-							offset: 4
+							offset: 5
 						}}
 					>
 						<Button type="primary" htmlType="submit">

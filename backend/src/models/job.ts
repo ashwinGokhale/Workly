@@ -20,9 +20,8 @@ export interface IJobModel extends Document {
 	coverLetter: boolean;
 	location: string;
 	recruiter: string;
-	blockers: string[];
-	nextSteps: string[];
-	offerDetails: string;
+	blockers: string;
+	nextSteps: string;
 	additionalInformation: string;
 }
 
@@ -63,14 +62,10 @@ const schema = new Schema(
 			default: ''
 		},
 		blockers: {
-			type: [String],
-			default: []
+			type: String,
+			default: ''
 		},
 		nextSteps: {
-			type: [String],
-			default: []
-		},
-		offerDetails: {
 			type: String,
 			default: ''
 		},
