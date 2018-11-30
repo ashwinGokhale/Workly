@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Spin, Card, Row, Col, Button } from 'antd';
 import ReactHtmlParser from 'react-html-parser';
@@ -49,6 +50,7 @@ class JobPage extends Component {
 			});
 
 			this.setState({ loading: false, job });
+			console.log('Got JOb:', job);
 		} catch (error) {
 			clear();
 			this.setState({ loading: false });
@@ -206,7 +208,7 @@ class JobPage extends Component {
 								<h3>Additional Information:</h3>
 							</u>
 						</Col>
-						<Col span={8}>
+						<Col span={6}>
 							{job.additionalInformation === 'None' ? (
 								<h3>None</h3>
 							) : (
@@ -222,12 +224,14 @@ class JobPage extends Component {
 				<br />
 				<Row>
 					<Col offset={10} span={3}>
-						<Button type="primary" icon="edit" href={`/jobs/${id}/edit`}>
-							Edit
-						</Button>
+						<Link to={`/jobs/${id}/edit`}>
+							<Button type="primary" icon="edit">
+								Edit
+							</Button>
+						</Link>
 					</Col>
 					<Col span={8}>
-						<Button type="danger" icon="delete">
+						<Button type="danger" icon="delete" onClick={this.onDelete}>
 							Delete
 						</Button>
 					</Col>

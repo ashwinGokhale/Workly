@@ -23,6 +23,7 @@ export const FLASH_RED_SET = 'FLASH_RED_SET';
 
 export const ADD_JOB = 'ADD_JOB';
 export const REMOVE_JOB = 'REMOVE_JOB';
+export const UPDATE_JOB = 'UPDATE_JOB';
 export const SET_JOBS = 'SET_JOBS';
 
 // Dispatchers
@@ -35,6 +36,7 @@ const setRedFlash = makeDispatcher(FLASH_RED_SET, 'msgRed');
 
 const addJob = makeDispatcher(ADD_JOB, 'job');
 const removeJob = makeDispatcher(REMOVE_JOB, 'job');
+const updateJob = makeDispatcher(UPDATE_JOB, 'job');
 const setJobs = makeDispatcher(SET_JOBS, 'jobs');
 
 // Creators
@@ -149,6 +151,22 @@ export const createJob = job => async dispatch => {
 		});
 
 		dispatch(addJob(response));
+		return response;
+	} catch (error) {
+		throw error.response.data;
+	}
+};
+
+export const editJob = (id, job) => async dispatch => {
+	try {
+		const token = getToken();
+		const {
+			data: { response }
+		} = await axios.put(`/api/jobs/${id}`, job, {
+			headers: { Authorization: `Bearer ${token}` }
+		});
+
+		dispatch(updateJob(response));
 		return response;
 	} catch (error) {
 		throw error.response.data;

@@ -1,4 +1,4 @@
-import { ADD_JOB, REMOVE_JOB, SET_JOBS } from '../actions';
+import { ADD_JOB, REMOVE_JOB, UPDATE_JOB, SET_JOBS } from '../actions';
 
 export default (
 	state = {
@@ -13,13 +13,18 @@ export default (
 				jobs: [...state.jobs, action.job]
 			};
 		}
+		case UPDATE_JOB: {
+			return {
+				...state,
+				jobs: state.jobs.map(job => (job._id === action.job._id ? action.job : job))
+			};
+		}
 		case REMOVE_JOB: {
 			return {
 				...state,
 				jobs: state.jobs.filter(job => job._id !== action.job._id)
 			};
 		}
-
 		case SET_JOBS: {
 			return {
 				...state,
