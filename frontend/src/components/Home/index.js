@@ -42,6 +42,7 @@ class HomePage extends Component {
 	render() {
 		return (
 			<div>
+				<Header/>
 				<h1>Workly</h1>
 				<JobTable {...this.state} />
 			</div>
