@@ -40,6 +40,15 @@ export const setStorage = store => {
 	_storage = store;
 };
 
+export const statuses = [
+	'Need To Apply',
+	'Applied',
+	'Interview',
+	'Received Offer',
+	'Accepted Offer',
+	'Denied'
+];
+
 export default {
 	HOME: '/',
 	LOGIN: '/login',
