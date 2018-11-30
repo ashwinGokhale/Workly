@@ -14,5 +14,7 @@
 		"docs/*"
 	],
 	"watch": ["./src"],
-	"ext": "ts, gql"
+	"ext": "ts, gql",
+	"signal": "SIGTERM",
+	"delay": 2500
 }

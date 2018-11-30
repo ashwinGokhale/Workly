@@ -4,15 +4,19 @@ const { PORT } = CONFIG;
 
 const start = async () => {
 	const server = await Server.createInstance();
-	server.app.listen(PORT, () =>
+	const listener = server.app.listen(PORT, () =>
 		console.log('CONFIG: ', CONFIG, `\nListening on port: ${PORT}`)
 	);
-	return server;
+	return {
+		server,
+		listener
+	};
 };
 
-start().then(server =>
+start().then(({ server, listener }) =>
 	// Graceful shutdown
 	process.on('SIGTERM', async () => {
+		listener.close();
 		await server.mongoose.disconnect();
 		process.exit(0);
 	})

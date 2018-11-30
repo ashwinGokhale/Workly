@@ -20,7 +20,7 @@ const statuses = [
 
 // TODO: Add blockers and next steps to form
 // TODO: Convert some inputs to text areas
-class CreateJob extends Component {
+class EditJobPage extends Component {
 	static propTypes = {
 		flash: PropTypes.func.isRequired,
 		clear: PropTypes.func.isRequired,
@@ -44,7 +44,7 @@ class CreateJob extends Component {
 			nextSteps: '',
 			additionalInformation: ''
 		};
-		console.log('Form props:', this.props);
+		console.log('Edit Job props:', this.props);
 	}
 
 	onTextChange = id => value => this.setState({ [id]: value });
@@ -85,9 +85,9 @@ class CreateJob extends Component {
 
 		return (
 			<div>
-				<Header message="Create Job" />
+				<Header message="Edit Job" />
 				<u>
-					<h2 className="center">Create Job</h2>
+					<h2 className="center">Edit Job</h2>
 				</u>
 				<Form layout="horizontal" onSubmit={this.onSubmit}>
 					<FormItem {...formItemLayout} label="Company *">
@@ -192,10 +192,11 @@ class CreateJob extends Component {
 }
 
 const mapStateToProps = state => ({
-	...state.sessionState
+	// ...state.sessionState,
+	...state.jobState
 });
 
 export default connect(
 	mapStateToProps,
 	{ flash: sendFlashMessage, clear: clearFlashMessages, addJob: createJob }
-)(CreateJob);
+)(EditJobPage);

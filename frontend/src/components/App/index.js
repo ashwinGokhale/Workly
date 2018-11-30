@@ -14,6 +14,8 @@ import SignUp from '../Signup';
 import ForgotPassword from '../ForgotPassword';
 import ResetPassword from '../ResetPassword';
 import CreateJob from '../CreateJob';
+import EditJob from '../EditJob';
+import Job from '../Job';
 import { storageChanged, clearFlashMessages, fetchProfile } from '../../actions';
 import './index.css';
 
@@ -89,6 +91,18 @@ class App extends Component {
 									exact
 									path={routes.CREATE_JOB}
 									component={CreateJob}
+									token={token}
+								/>
+								<ProtectedRoute
+									exact
+									path={routes.EDIT_JOB}
+									component={EditJob}
+									token={token}
+								/>
+								<ProtectedRoute
+									exact
+									path={routes.JOB}
+									component={Job}
 									token={token}
 								/>
 								<Route exact path={routes.SIGNUP} component={SignUp} />

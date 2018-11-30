@@ -124,6 +124,21 @@ export const fetchJobs = params => async dispatch => {
 	}
 };
 
+export const fetchJob = async (id, params) => {
+	try {
+		const token = getToken();
+		const {
+			data: { response }
+		} = await axios.get(`/api/jobs/${id}`, {
+			params,
+			headers: { Authorization: `Bearer ${token}` }
+		});
+		return response;
+	} catch (error) {
+		throw error.response.data;
+	}
+};
+
 export const createJob = job => async dispatch => {
 	try {
 		const token = getToken();
@@ -134,6 +149,22 @@ export const createJob = job => async dispatch => {
 		});
 
 		dispatch(addJob(response));
+		return response;
+	} catch (error) {
+		throw error.response.data;
+	}
+};
+
+export const deleteJob = id => async dispatch => {
+	try {
+		const token = getToken();
+		const {
+			data: { response }
+		} = await axios.delete(`/api/jobs/${id}`, {
+			headers: { Authorization: `Bearer ${token}` }
+		});
+
+		dispatch(removeJob(response));
 		return response;
 	} catch (error) {
 		throw error.response.data;

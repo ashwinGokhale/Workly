@@ -1,3 +1,3 @@
 import React from 'react';
 
-export default () => <div className="footer">Footer</div>;
+export default () => <div className="footer" />;

@@ -28,6 +28,7 @@ class HomePage extends Component {
 
 	componentDidMount = async () => {
 		const { clear, flash, getJobs } = this.props;
+		console.log('Home page props:', this.props);
 		try {
 			clear();
 			const jobs = await getJobs();
@@ -39,12 +40,14 @@ class HomePage extends Component {
 		}
 	};
 
+	viewJob = id => this.props.history.push(`/jobs/${id}`);
+
 	render() {
 		return (
 			<div>
-				<Header/>
-				<h1>Workly</h1>
-				<JobTable {...this.state} />
+				<Header />
+				<h1 className="center">Workly</h1>
+				<JobTable {...this.state} viewJob={this.viewJob} />
 			</div>
 		);
 	}

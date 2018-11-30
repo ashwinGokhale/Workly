@@ -24,7 +24,7 @@ class JobTable extends React.Component {
 	};
 
 	render() {
-		const { jobs, loading } = this.props;
+		const { jobs, loading, viewJob } = this.props;
 		const data = jobs.map(job => {
 			job = {
 				key: job._id,
@@ -113,7 +113,21 @@ class JobTable extends React.Component {
 			// 	additionalInformation: ''
 			// }
 		];
-		return <Table columns={columns} dataSource={data} loading={loading} />;
+		return (
+			<Table
+				columns={columns}
+				dataSource={data}
+				loading={loading}
+				onRow={record => {
+					return {
+						onClick: () => {
+							console.log('Record clicked:', record);
+							viewJob(record._id);
+						}
+					};
+				}}
+			/>
+		);
 	}
 }
 

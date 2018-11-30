@@ -60,5 +60,6 @@ export default {
 	USER: '/user/:id',
 	POST: '/post',
 	CREATE_JOB: '/jobs/create',
-	JOB: '/jobs/:id'
+	JOB: '/jobs/:id',
+	EDIT_JOB: '/jobs/:id/edit'
 };
